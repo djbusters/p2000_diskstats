@@ -28,18 +28,18 @@ for property in answerxml.xpath('//PROPERTY'):
                 print 'Authentication Unsuccessful'
                 sys.exit()
             else:
-                sessionkey =  property.text
+                sessionkey = property.text
 
 disk_url = "http://%s/api/show/disks" % host
-disk_req = Request(disk_url, headers={ 'sessionKey': sessionkey })
+disk_req = Request(disk_url, headers={'sessionKey': sessionkey})
 disks = urlopen(disk_req).read()
 disksxml = ET.fromstring(disks)
 
 for property in disksxml.xpath('//PROPERTY'):
     for attrib in property.attrib:
-        if property.attrib[attrib] =='durable-id':
+        if property.attrib[attrib] == 'durable-id':
             print property.text,
-        if property.attrib[attrib] =='serial-number':
+        if property.attrib[attrib] == 'serial-number':
             print property.text,
-        if property.attrib[attrib] =='status':
+        if property.attrib[attrib] == 'status':
             print property.text
